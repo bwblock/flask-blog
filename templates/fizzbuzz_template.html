@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<form>
+<h2> Input a number: </h2>
+<input type = 'text' name = 'num'>
+
+<button> Add </button>
+</form>
+
+
+<ol>
+{% for x in range(1,n+1) %}
+<li>
+{% if x % 15 == 0 %}
+FizzBuzz
+{% elif x%3 ==0 %}
+Fizz
+{% elif x%5 == 0 %}
+Buzz
+{% else %}
+{{x}}
+{% endif %}
+{% endfor %}
+
+  </li>
+
+{% endblock %}
+
