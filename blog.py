@@ -113,7 +113,7 @@ def NewPost():
             return redirect(url_for('PostPage', post_id = newpost.id))
         else:
             error = "subject and content, please!"
-            self.render("newpost.html", subject=subject, content=content, error=error)
+            return render_template("newpost.html", subject=subject, content=content, error=error)
 
 
 
