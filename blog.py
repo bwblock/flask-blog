@@ -8,6 +8,7 @@ from sqlalchemy import create_engine, desc
 from sqlalchemy.orm import sessionmaker
 from database_setup import Base, Post
 
+# -------------  Heroku ---------------#
 
 import datetime
 
@@ -114,7 +115,6 @@ def NewPost():
         else:
             error = "subject and content, please!"
             return render_template("newpost.html", subject=subject, content=content, error=error)
-
 
 
 #   -------------------  regular expressions for signup ---------------------------------#
