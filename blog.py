@@ -4,8 +4,6 @@ from flask import Flask, render_template, request, redirect, url_for, jsonify, f
 
 app = Flask(__name__)
 
-from flask.ext.heroku import Heroku
-
 from sqlalchemy import create_engine, desc
 from sqlalchemy.orm import sessionmaker
 from database_setup import Base, Post
@@ -82,7 +80,7 @@ def signup():
 @app.route("/blog/", methods = ['GET'])
 def BlogFront():
 #        posts = db.GqlQuery("select * from Post order by created desc limit 10")
-        posts = session.query(Post).order_by(desc(Post.created)).all()
+        posts = session.query(Post).order_by(desc(Post.created)).limit(10).all()
         return render_template('front.html', posts = posts)
 
 @app.route("/blog/permalink/<int:post_id>")
@@ -115,7 +113,7 @@ def NewPost():
             return redirect(url_for('PostPage', post_id = newpost.id))
         else:
             error = "subject and content, please!"
-            self.render("newpost.html", subject=subject, content=content, error=error)
+            return render_template("newpost.html", subject=subject, content=content, error=error)
 
 
 
@@ -134,8 +132,6 @@ def valid_email(email):
     return email and EMAIL_RE.match(email)
 
 
-
-
 if __name__ == '__main__':
     app.debug = True
-    app.run()
+    app.run(host='0.0.0.0', port=5000)
