@@ -80,7 +80,7 @@ def signup():
 @app.route("/blog/", methods = ['GET'])
 def BlogFront():
 #        posts = db.GqlQuery("select * from Post order by created desc limit 10")
-        posts = session.query(Post).order_by(desc(Post.created)).all()
+        posts = session.query(Post).order_by(desc(Post.created)).limit(10).all()
         return render_template('front.html', posts = posts)
 
 @app.route("/blog/permalink/<int:post_id>")
@@ -132,8 +132,6 @@ def valid_email(email):
     return email and EMAIL_RE.match(email)
 
 
-
-
 if __name__ == '__main__':
     app.debug = True
-    app.run(host='0.0.0.0', port=8080)
+    app.run(host='0.0.0.0', port=5000)
