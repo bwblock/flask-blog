@@ -4,8 +4,6 @@ from flask import Flask, render_template, request, redirect, url_for, jsonify, f
 
 app = Flask(__name__)
 
-from flask.ext.heroku import Heroku
-
 from sqlalchemy import create_engine, desc
 from sqlalchemy.orm import sessionmaker
 from database_setup import Base, Post
@@ -138,4 +136,4 @@ def valid_email(email):
 
 if __name__ == '__main__':
     app.debug = True
-    app.run()
+    app.run(host='0.0.0.0', port=8080)
